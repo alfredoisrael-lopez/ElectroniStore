@@ -1,0 +1,36 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: electronistore
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: electronistore
+    spec:
+      containers:
+      - name: electronistore
+        image: "registry.ng.bluemix.net/alfredo-lopez/electronistore:latest"
+        # for local development against minikube registry
+        imagePullPolicy: "Always"        
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: electronistore
+  labels:
+    app: electronistore
+spec:
+  type: NodePort
+  ports:
+    # the port that this service should serve on
+    - name: http
+      port: 80
+      targetPort: 80
+      nodePort: 30080
+  # label keys and values that must match in order to receive traffic for this service
+  selector:
+    app: electronistore
