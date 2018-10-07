@@ -30,7 +30,7 @@ var obtainPoints = function() {
     });
 };
 
-$(document).ready(obtainPoints);
+//$(document).ready(obtainPoints);
 
 $('#checkout').click(function() {
     var pointsToRedeem = parseInt((Number($('#itemQuantity1').val()) * Number($('#itemPrice1').val())) + (Number($('#itemQuantity2').val()) * Number($('#itemPrice2').val())));
